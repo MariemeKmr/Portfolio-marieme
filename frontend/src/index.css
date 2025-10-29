@@ -1,0 +1,249 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens */
+:root {
+  --accent-emerald: 16 185 129; /* emerald-500 */
+  --accent-violet: 139 92 246;  /* violet-500 */
+}
+
+/* Headings mix: Sora for h2/h3, Playfair for hero/title */
+h1, .heading-hero {
+  @apply font-serif text-4xl md:text-5xl font-semibold tracking-tight;
+}
+h2 {
+  @apply font-display text-3xl md:text-4xl font-semibold tracking-tight;
+}
+h3 {
+  @apply font-display text-2xl font-semibold;
+}
+
+.card {
+  @apply rounded-2xl shadow-soft bg-white/90 dark:bg-stone-900/60 backdrop-blur-sm border border-stone-200/60 dark:border-stone-800;
+}
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-colors;
+  background: rgb(var(--accent-emerald));
+  color: white;
+}
+.btn-primary:hover { background: rgba(var(--accent-emerald), 0.9); }
+.btn-ghost {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium border border-stone-300 dark:border-stone-700;
+}
+
+/* Police du hero sans la taille */
+.hero-font {
+  @apply font-serif tracking-tight;
+}
+
+a { @apply underline-offset-2 decoration-stone-300 hover:decoration-stone-500; }
+
+/* Animations / Ã©tats de lâ€™icÃ´ne */
+.sun-and-moon > :is(.moon, .sun, .sun-beams) { transform-origin: center; }
+.sun-and-moon > :is(.moon, .sun) { fill: currentColor; }
+.sun-and-moon > .sun-beams { stroke: currentColor; stroke-width: 2px; }
+
+[data-theme="dark"] .sun-and-moon > .sun { transform: scale(1.75); }
+[data-theme="dark"] .sun-and-moon > .sun-beams { opacity: 0; }
+[data-theme="dark"] .sun-and-moon > .moon > circle { transform: translateX(-7px); }
+
+@supports (cx: 1) {
+  [data-theme="dark"] .sun-and-moon > .moon > circle { cx: 17; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun { transition: transform .5s cubic-bezier(.2,.7,.3,1); }
+  .sun-and-moon > .sun-beams { transition: transform .5s cubic-bezier(.2,.7,.3,1), opacity .5s ease; }
+  .sun-and-moon .moon > circle { transition: transform .25s ease-out; }
+  @supports (cx: 1) { .sun-and-moon .moon > circle { transition: cx .25s ease-out; } }
+
+  [data-theme="dark"] .sun-and-moon > .sun { transition-duration: .25s; transform: scale(1.75); }
+  [data-theme="dark"] .sun-and-moon > .sun-beams { transition-duration: .15s; transform: rotateZ(-25deg); }
+  [data-theme="dark"] .sun-and-moon > .moon > circle { transition-duration: .5s; transition-delay: .25s; }
+}
+
+/* === THEME TOKENS (violet = primaire, émeraude = secondaire) === */
+:root {
+  --primary-violet: 139 92 246;         /* violet-500 */
+  --primary-violet-600: 124 58 237;     /* violet-600 */
+  --accent-emerald: 16 185 129;         /* emerald-500 */
+}
+
+/* Utilities */
+.text-primary { color: rgb(var(--primary-violet)); }
+.bg-primary { background: rgb(var(--primary-violet)); }
+.bg-primary-hover { background: rgb(var(--primary-violet-600)); }
+.text-accent { color: rgb(var(--accent-emerald)); }
+.bg-accent { background: rgb(var(--accent-emerald)); }
+
+/* Buttons */
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-colors;
+  background: rgb(var(--primary-violet));
+  color: white;
+}
+.btn-primary:hover { background: rgb(var(--primary-violet-600)); }
+
+.btn-secondary {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-colors;
+  background: rgb(var(--accent-emerald));
+  color: white;
+}
+.btn-secondary:hover { background: rgba(var(--accent-emerald), 0.9); }
+
+/* Sun/Moon animations (adapté au data-theme) */
+.sun-and-moon > :is(.moon, .sun, .sun-beams) { transform-origin: center; }
+.sun-and-moon > :is(.moon, .sun) { fill: currentColor; }
+.sun-and-moon > .sun-beams { stroke: currentColor; stroke-width: 2px; }
+
+[data-theme="dark"] .sun-and-moon > .sun { transform: scale(1.75); }
+[data-theme="dark"] .sun-and-moon > .sun-beams { opacity: 0; }
+[data-theme="dark"] .sun-and-moon > .moon > circle { transform: translateX(-7px); }
+
+@supports (cx: 1) {
+  [data-theme="dark"] .sun-and-moon > .moon > circle { cx: 17; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun { transition: transform .5s cubic-bezier(.2,.7,.3,1); }
+  .sun-and-moon > .sun-beams { transition: transform .5s cubic-bezier(.2,.7,.3,1), opacity .5s ease; }
+  .sun-and-moon .moon > circle { transition: transform .25s ease-out; }
+  @supports (cx: 1) { .sun-and-moon .moon > circle { transition: cx .25s ease-out; } }
+  [data-theme="dark"] .sun-and-moon > .sun { transition-duration: .25s; transform: scale(1.75); }
+  [data-theme="dark"] .sun-and-moon > .sun-beams { transition-duration: .15s; transform: rotateZ(-25deg); }
+  [data-theme="dark"] .sun-and-moon > .moon > circle { transition-duration: .5s; transition-delay: .25s; }
+}
+
+/* Hover doux sur les cartes */
+.card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+
+/* Effet holographique violet pour les cartes */
+.holo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem; /* équivalent rounded-xl */
+  transition: all 0.5s ease;
+}
+
+.holo-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    0deg, 
+    transparent, 
+    transparent 30%, 
+    rgba(186, 117, 251, 0.206) /* Violet clair #a855f7 */
+  );
+  transform: rotate(-45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.holo-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); /* Glow violet */
+}
+
+.holo-card:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
+}
+
+.experience-card {
+  transition: all 0.4s ease;
+}
+
+.experience-card:hover {
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+  transform: translateY(-4px);
+}
+
+/* Cartes compactes pour la page Compétences */
+.card-lite {
+  @apply rounded-2xl border border-stone-200/70 dark:border-stone-800
+         bg-white/80 dark:bg-stone-900/50 shadow-sm transition-all;
+  /* padding se fait côté JSX (p-4 / p-5) */
+}
+.card-lite:hover {
+  /* Ombre douce violette, très légère */
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.18);
+}
+
+/* Espacements compacts dans une carte de compétences */
+.skill-group { @apply space-y-3; }            /* au lieu de gros gaps */
+.skill-title { @apply font-display text-lg; } /* titre plus fin */
+
+/* Barres un peu plus fines (si tu utilises SkillBar.jsx) */
+.skill-track   { @apply h-2.5 rounded-full bg-stone-200/60 dark:bg-stone-800; }
+.skill-fill    { @apply h-full rounded-full; } /* couleur gérée dans le composant */
+
+/* Hover violet cohérent avec le reste du site */
+.violet-hover {
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+  border-color: rgba(214, 211, 209, .6); /* pierre-200/60 par défaut */
+}
+.violet-hover:hover {
+  box-shadow: 0 12px 36px rgba(139, 92, 246, .25);
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, .45);
+}
+/* --- Titres : même police que .heading-hero, tailles en-dessous --- */
+h1, .heading-hero {
+  @apply font-serif text-4xl md:text-5xl font-semibold tracking-tight;
+}
+h2, .heading-sub {
+  /* remplace l’ancien h2 font-display */
+  @apply font-serif text-2xl md:text-3xl font-semibold tracking-tight;
+}
+h3, .heading-ter {
+  @apply font-serif text-xl md:text-2xl font-semibold;
+}
+
+
+.emerald-hover {
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+  border-color: rgba(214, 211, 209, .6);
+}
+.emerald-hover:hover {
+  box-shadow: 0 12px 36px rgba(16, 185, 129, .25);     /* glow émeraude */
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, .45);
+}
+
+/* Make sure the background covers everything */
+html, body, #root { min-height: 100%; }
+
+/* Use a fixed full-viewport gradient layer + subtle noise to prevent banding */
+[data-theme="dark"] body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* smoother teal → plum transition, longer blend, no hard stops */
+  background:
+    radial-gradient(1200px 700px at 20% -10%, #144552 0%, rgba(20,69,82,0) 60%),
+    linear-gradient(160deg, #1B3A4B 0%, #144552 40%, #312244 80%, #3E1F47 100%);
+  /* gentle saturation so it doesn’t look black */
+  filter: saturate(0.95);
+}
+
+/* Very light noise layer to hide banding (SVG data URI) */
+[data-theme="dark"] body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .05;                /* keep it subtle */
+  mix-blend-mode: overlay;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' seed='2' type='fractalNoise'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Cards already use your custom surfaces; ensure no section adds its own dark bg */
+[data-theme="dark"] section { background: transparent !important; }
