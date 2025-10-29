@@ -1,0 +1,4 @@
+# Empêcher les fichiers d'environnement d'être suivis
+.env
+backend/.env
+frontend/.env
